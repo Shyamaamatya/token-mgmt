@@ -3,36 +3,13 @@ import { Link } from 'react-router-dom';
 import { Navlogin } from '../../components/Navlogin/Navlogin';
 import Blogo from "../../Images/Blogo.png"
 
+import { Formik, Form } from "formik";
+
 import './style.css';
 
 function Login() {
     return (
         <>
-        {/* <div className="nav">
-        <div className="nav-left">
-          <div className="logo">
-            <Link exact className="Link" to="/">
-              <img src={B} alt="B" />
-            </Link>
-          </div>
-          <div className="input">
-            <input
-              className="search"
-              type="text"
-              placeholder="type to search"
-            />
-          </div>
-        </div>
-        <ul className="nav-right">
-          <Link exact className="Link" to="/Home">
-            <li>Home</li>
-          </Link>
-          <Link exact className="Link" to="/services">
-            <li>Services</li>
-          </Link>
-          
-        </ul>
-      </div> */}
 
         <div className="login-page">
           <Navlogin/>

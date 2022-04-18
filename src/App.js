@@ -9,9 +9,19 @@ import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import { User } from './pages/User/User';
 
+import OneSignal from 'react-onesignal';
+import { useEffect } from 'react';
+
 
 
 function App() {
+
+  useEffect(() => {
+    OneSignal.init({
+    appId: "613eeda4-370c-48a8-92ba-525fe9b5e25f"
+    });
+    }, []);
+
   return (
     <div className="App">
       <Routes>
