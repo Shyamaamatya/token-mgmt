@@ -11,9 +11,9 @@ import Navbar from '../../components/Navbar/Navbar';
 const Home = () => {
   return (
     <>
-      
-      <div className="home-page">
       <Navbar/>
+      <div className="home-page">
+      
             <div className="banner">
             <div className="home">
               <div className='form-head'>

@@ -11,6 +11,7 @@ import { User } from './pages/User/User';
 
 import OneSignal from 'react-onesignal';
 import { useEffect } from 'react';
+import Buytoken from './pages/Buytoken/Buytoken';
 
 
 
@@ -35,6 +36,8 @@ function App() {
       {/* <Route exact path="/" element={ <Logintab />} /> */}
       <Route path="/services" element={ <Services />} />
       <Route exact path="/signup" element={ <Signup />} />
+      <Route exact path="/buytoken" element={ <Buytoken />} />
+
 
 
 
