@@ -1,111 +1,112 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navlogin } from '../../components/Navlogin/Navlogin';
-import Blogo from "../../Images/Blogo.png"
+// 
 
-import { Formik, Form, withFormik } from "formik";
-import * as Yup from "yup";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Navlogin } from '../../components/Navlogin/Navlogin'
+import { api } from '../../Helper/api'
+import Blogo from '../../Images/Blogo.png'
 
-import './style.css';
+import './style.css'
 
 function Login() {
-  const values = {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [values, setValues] = useState({
     email: '',
     password: '',
-    remember: false
-  }
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required("can't be empty"),
-    password: Yup.string()
-      .min(8)
-      .required("can't be empty")
-  });
+    remember: false,
+  })
+  const [error, setError] = useState({ email: '', password: '' })
 
-  const errors = {};
- 
-   if (!values.email) {
-     errors.email = 'Required';
-   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-     errors.email = 'Invalid email address';
-   }
-  
-  
-    return (
-        <>
-        
-          <Navlogin/>
-          <div className="login-page">
-          <Formik
-            initialValues={{ email: "", password: "" }}
-            validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting, resetForm }) => {
-              setSubmitting(true);
-              alert("login success");
-            }}
-          >
-          {({
-              
-              handleChange,
-              handleBlur,
-              touched,
-              handleSubmit,
-              isSubmitting
-            }) => (
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className='form-head'>
-              <div className="Blogo">
-                <img src={Blogo} alt="Blogo" />
+  const handelChange = (e) => {
+    setValues({ ...values, [e?.target?.name]: e?.target?.value })
+  }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   console.log({ values })
+  // }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   api.get('.login', {
+  //   params: {
+  //   email: values.email,
+  //   password: values.password,
+  //   },
+  //   })
+  //   console.log({ values })
+  //   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+    const res = await api.post('/user/login', {
+    params: {
+    email: values.email,
+    password: values.password,
+    },
+    })
+    } catch (error) {
+    console.log(error)
+    }
+    console.log({ values })
+    }
+
+  return (
+    <>
+      <Navlogin />
+      <div className='login-page'>
+        <form onSubmit={handleSubmit} className='login-form'>
+          <div className='form-head'>
+            <div className='Blogo'>
+              <img src={Blogo} alt='Blogo' />
             </div>
             <h2>Login</h2>
+          </div>
+
+          <div className='inner-form'>
+            <label for='uname'>Username or Email:</label>
+            <br />
+            <input
+              type='email'
+              name='email'
+              onChange={handelChange}
+              value={values.email}
+              placeholder='email'
+            />
+            {error.email && <span className='error'>{error.email}</span>}
+            <br />
+            <label for='psw'>Password:</label>
+            <br />
+            <input
+              type='password'
+              name='password'
+              required
+              onChange={handelChange}
+              value={values.password}
+              placeholder='Password'
+            />
+            {error.password && <span className='error'>{error.password}</span>}
+            <Link to='#' className='forgot'>
+              Forgot password?
+            </Link>
+            <button type='submit' disabled={isSubmitting}>
+              Login
+            </button>
+
+            <div className='links-button'>
+              <div className='links'>
+                <h5>Don't have an account?</h5>
+                <Link to='signup' className='signup'>
+                  Sign up now.
+                </Link>
               </div>
-
-             
-              
-            <div className='inner-form'>
-                <label for="uname">Username or Email:</label><br/>
-                <input type="text" name="uname"   
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    placeholder="email"
-                    />
-                    {errors.email && touched.email && (
-                    <span className="error">{errors.email}</span>
-                    )}
-                  <br />
-                <label for="psw">Password:</label><br/>
-                <input type="password" name="psw" required 
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                placeholder="Password"
-                />
-                {errors.password && touched.password && (
-                    <span className="error">{errors.password}</span>
-                )}
-                <Link to="#" className='forgot'>Forgot password?</Link>
-                <button type="submit" disabled={isSubmitting}>Login</button>
-                
-            <div className="links-button">
-                <div className="links">
-                    <h5>Don't have an account?</h5>
-                <Link to="signup" className='signup'>Sign up now.</Link>
-
-                   
-                </div>
-                
             </div>
-
-            </div>
-            </form>
-            )}
-            </Formik>
-                       
-        </div>
-        </>
-    )
+          </div>
+        </form>
+      </div>
+    </>
+  )
 }
 
-export default Login;
+export default Login
