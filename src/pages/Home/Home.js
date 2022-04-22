@@ -53,7 +53,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <button type="submit">Generate Token</button>
+            <Link exact className="services" to="/services"><button type="submit">Generate Token</button></Link>
 
             </div>
             </div>

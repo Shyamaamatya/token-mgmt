@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import "./style.css"
 
 import { Select, Tabs } from 'antd';
+import { Link } from 'react-router-dom';
 const { TabPane } = Tabs;
 
 const { Option } = Select;
@@ -53,8 +54,8 @@ const Services = () => {
             </Tabs>
 
             
-
-            <button type="submit" className='generate'>Generate Token</button>
+            
+            <Link exact className="user" to="/user"><button type="submit" className='generate'>Generate Token</button></Link>
 
             <p className='rush'>In a Rush? Get your work done right away by buying a token in the front lines.</p>
 

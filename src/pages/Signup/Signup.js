@@ -7,9 +7,9 @@ import Blogo from "../../Images/Blogo.png"
 const Signup = () => {
   return (
     <>
-      <div className="login-page">
+      
           <Navlogin/>
-            
+          <div className="login-page">
             <form className="login-form">
               <div className='form-head'>
               <div className="Blogo">
