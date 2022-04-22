@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { Navlogin } from '../../components/Navlogin/Navlogin'
 import { api } from '../../Helper/api'
 import Blogo from '../../Images/Blogo.png'
-
+import axios from 'axios'
 import './style.css'
 
 function Login() {
@@ -15,7 +15,9 @@ function Login() {
     password: '',
     remember: false,
   })
-  const [error, setError] = useState({ email: '', password: '' })
+  const [error, setError] = useState({ email: '', password: '' });
+  const [responseMsg , setResponseMsg] = useState("")
+
 
   const handelChange = (e) => {
     setValues({ ...values, [e?.target?.name]: e?.target?.value })
@@ -39,17 +41,19 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-    const res = await api.post('/user/login', {
-    params: {
+
+api.post('/user/login', {
     email: values.email,
     password: values.password,
     },
+    ).then((res)=>{
+      setResponseMsg("success")
     })
-    } catch (error) {
-    console.log(error)
-    }
-    console.log({ values })
+    .catch((error)=>{
+      setResponseMsg("Email or password incorrect")
+    })
+// const article = { title: 'React POST Request Example' };
+// const response = await axios.post('https://reqres.in/api/articles', article);
     }
 
   return (
@@ -63,7 +67,7 @@ function Login() {
             </div>
             <h2>Login</h2>
           </div>
-
+            {responseMsg.length>0 && <div>{responseMsg}</div>}
           <div className='inner-form'>
             <label for='uname'>Username or Email:</label>
             <br />
