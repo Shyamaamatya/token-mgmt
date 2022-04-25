@@ -7,6 +7,7 @@ const Khalti = () => {
   const handleCheckout = () => {
     let checkout = new KhaltiCheckout(config);
     checkout.show({amount: 5000})
+    console.log(checkout)
   }
     
 
