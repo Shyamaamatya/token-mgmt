@@ -19,7 +19,7 @@ const Signup = () => {
               </div>
               
             <div className='inner-form'>
-                <label for="uname">Full Name:</label><br/>
+                <label htmlFor="uname">Full Name:</label><br/>
                 <input type="text" placeholder='Shyama Amatya' name="uname" required /><br />
                 <label for="email">Email Id:</label><br/>
                 <input type="text" placeholder='shyama@gmail.com' name="emal" required /><br />
