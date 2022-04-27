@@ -15,3 +15,21 @@
     gap: 30px;
     padding-bottom: 20px;
 }
+
+.pay {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.lineno {
+    /* display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px; */
+    color: #000;
+    font-weight: 700;
+    margin-right: 10px;
+    list-style: none;
+}

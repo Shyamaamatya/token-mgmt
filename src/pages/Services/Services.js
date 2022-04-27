@@ -4,11 +4,21 @@ import "./style.css"
 
 import { Select, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
-const { TabPane } = Tabs;
+import { TimePicker } from 'antd';
+import moment from 'moment';
 
-const { Option } = Select;
+// const onChange = (time, timeString) => {
+//   console.log(time, timeString);
+
+// }
+
 
 const Services = () => {
+  const format = 'HH:mm';
+
+  const { TabPane } = Tabs;
+
+const { Option } = Select;
   return (
     <div>
         <header>
@@ -53,13 +63,21 @@ const Services = () => {
               </TabPane>
             </Tabs>
 
+            <div className='time'>
+              <p>Time:</p>
+              <TimePicker defaultValue={moment('12:08', format)} format={format} />
+              {/* <TimePicker.RangePicker /> */}
+  {/* <TimePicker onChange={onChange} defaultOpenValue={moment('00:00', 'HH:mm')} /> */}
+{/* ); */}
+            </div>
+
             
             
             <Link exact className="user" to="/user"><button type="submit" className='generate'>Generate Token</button></Link>
 
             <p className='rush'>In a Rush? Get your work done right away by buying a token in the front lines.</p>
 
-            <button type="submit" className='buy'>Buy a Token</button>
+            <Link exact className="user" to="/buytoken"><button type="submit" className='buy'>Buy a Token</button></Link>
 
             </div>
   

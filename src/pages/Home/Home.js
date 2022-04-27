@@ -33,7 +33,7 @@ const Home = () => {
               <br />
               Book your token from anywhere and anytime! </p>
             </div>
-            <div className='notification'>
+            {/* <div className='notification'>
               <p>You have no bookings, yet</p>
             </div>
             <div className='notifications'>
@@ -44,7 +44,7 @@ const Home = () => {
                   <li className='notification__list'>you have appointent at 3:30 pm</li>
                   <li className='notification__list'>you have appointent at 11:30 am</li>
                 </ul>
-            </div>
+            </div> */}
                 
             <div className="home-button">
                 <div className="links">

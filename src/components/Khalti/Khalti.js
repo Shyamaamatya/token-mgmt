@@ -1,7 +1,6 @@
 import React from 'react'
 import KhaltiCheckout from "khalti-checkout-web";
 import config from './KhaltiConfig';
-import { api1 } from '../../Helper/api';
 const Khalti = () => {
   
   const handleCheckout = () => {

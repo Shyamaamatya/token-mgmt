@@ -7,6 +7,7 @@ import Services from './pages/Services/Services';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
+import Notification from './pages/Notification/Notification';
 import { User } from './pages/User/User';
 
 import OneSignal from 'react-onesignal';
@@ -37,6 +38,8 @@ function App() {
       <Route path="/services" element={ <Services />} />
       <Route exact path="/signup" element={ <Signup />} />
       <Route exact path="/buytoken" element={ <Buytoken />} />
+      <Route exact path="/notification" element={ <Notification />} />
+
 
 
 
