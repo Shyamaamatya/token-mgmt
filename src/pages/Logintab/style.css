@@ -2,7 +2,7 @@
 /* Body {
     background: rgba(104, 124, 193, 0.34);
 } */
-.conatiner {
+/* .conatiner {
     background-color: whitesmoke;
 }
 .bloc-tabs {
@@ -18,7 +18,7 @@
     padding: 15px;
     text-align: center;
     /* width: 50%; */
-    width: 100px;
+    /* width: 100px;
     height: 15px;
     border-radius: 10px 10px;
     background: rgba(104, 124, 193, 1);
@@ -33,8 +33,8 @@
     font-size: 16px;
     font-weight: bold;
     font-family: 'Arimo', sans-serif;
-  }
-  .active-tabs  {
+  } */ 
+  /* .active-tabs  {
     background: white;
     color: #313230;
     border-bottom: 1px solid transparent;
@@ -64,10 +64,10 @@
   .content {
     /* background: rgba(104, 124, 193, 0.34); */
 
-    padding: 20px;
-    display: none;
-  }
-  .content p {
+    /* padding: 20px;
+    display: none; */
+  /* } */ 
+  /* .content p {
     color: #666666 ;
     font-style: italic;
     font-size: 0.85em;
@@ -103,4 +103,4 @@
     margin-left: 13px;
     margin-right: 10px;
     margin-bottom: 20px;
-}
+} */

@@ -5,7 +5,7 @@ const UserData = [
     },
     {
         title: 'Email',
-        value: 'shamyamatya@gmail.com'
+        value: 'shyamaamatya@gmail.com'
     },
     {
         title: 'Account No.',

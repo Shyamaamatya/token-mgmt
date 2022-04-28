@@ -6,6 +6,8 @@ import { Select, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import { TimePicker } from 'antd';
 import moment from 'moment';
+import { api } from '../../Helper/api';
+import { toast } from 'react-toastify';
 
 // const onChange = (time, timeString) => {
 //   console.log(time, timeString);
@@ -15,7 +17,16 @@ import moment from 'moment';
 
 const Services = () => {
   const format = 'HH:mm';
-
+const generateToken = () => {
+  api.post(`/token/${localStorage.getItem("id")}`
+      ).then((res)=>{
+        console.log(res)
+      })
+      
+      .catch((error)=>{
+        toast.error(error?.message)
+      })
+}
   const { TabPane } = Tabs;
 
 const { Option } = Select;
@@ -73,7 +84,7 @@ const { Option } = Select;
 
             
             
-            <Link exact className="user" to="/user"><button type="submit" className='generate'>Generate Token</button></Link>
+            <button className='generate'>Generate Token</button>
 
             <p className='rush'>In a Rush? Get your work done right away by buying a token in the front lines.</p>
 

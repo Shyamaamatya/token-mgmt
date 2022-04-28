@@ -47,7 +47,13 @@ api.post('/user/login', {
     password: values.password,
     },
     ).then((res)=>{
+      localStorage.setItem("id", res.data.user[0]._id)
+      localStorage.setItem("username", res.data.user[0].username)
+      localStorage.setItem("email", res.data.user[0].email)
+
+      console.log(localStorage.getItem("id"))
       setResponseMsg("success")
+      console.log(res.data.user)
     })
     .catch((error)=>{
       setResponseMsg("Email or password incorrect")
