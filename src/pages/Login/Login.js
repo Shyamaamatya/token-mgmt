@@ -19,7 +19,7 @@ function Login() {
   const [responseMsg , setResponseMsg] = useState("")
 
 
-  const handelChange = (e) => {
+  const handleChange = (e) => {
     setValues({ ...values, [e?.target?.name]: e?.target?.value })
   }
 
@@ -80,7 +80,7 @@ api.post('/user/login', {
             <input
               type='email'
               name='email'
-              onChange={handelChange}
+              onChange={handleChange}
               value={values.email}
               placeholder='email'
             />
@@ -92,7 +92,7 @@ api.post('/user/login', {
               type='password'
               name='password'
               required
-              onChange={handelChange}
+              onChange={handleChange}
               value={values.password}
               placeholder='Password'
             />
