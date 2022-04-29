@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import "./style.css"
 
@@ -16,17 +16,50 @@ import { toast } from 'react-toastify';
 
 
 const Services = () => {
+  const [data, setData] = useState({
+    time: " ",
+    purpose: " ",
+
+  })
+
+  const [selectedData, setSelectedData] = useState([]);
+
+  const handleChange = (e) => {
+    setSelectedData(e);
+    console.log({e});
+  }
+
+  const handle= (e) => {
+    const newdata={...data}
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
+  }
   const format = 'HH:mm';
-const generateToken = () => {
-  api.post(`/token/${localStorage.getItem("id")}`
-      ).then((res)=>{
-        console.log(res)
-      })
+// const generateToken = (e) => {
+//   e.preventDefault();
+//   api.post(`/token/${localStorage.getItem("id")}`
+//       ).then((res)=>{
+//         console.log(res)
+//       })
       
-      .catch((error)=>{
-        toast.error(error?.message)
-      })
-}
+//       .catch((error)=>{
+//         toast.error(error?.message)
+//       })
+// }
+
+const generateToken = async(e) => {
+  const id = await localStorage.getItem("id")
+  e.preventDefault();
+  api.post(`/token/${id}`
+  ).then((res)=>{
+  console.log(res)
+  })
+  
+  .catch((error)=>{
+  toast.error(error?.message)
+  })
+  }
   const { TabPane } = Tabs;
 
 const { Option } = Select;
@@ -41,15 +74,25 @@ const { Option } = Select;
               </div>
             <Tabs defaultActiveKey="1">
               <TabPane tab="Transaction" key="1">
-                <Select
+                {/* <Select
                 showSearch
                 placeholder="Select a transaction"
                 optionFilterProp="children"
-                // onChange={onChange}
+                onChange={(e) => handleChange(e)} 
+                id="purpose"
+                value={data.purpose}
                 // onSearch={onSearch}
                 filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 }
-              >
+              > */}
+              <Select
+              mode="multiple"
+              allowClear
+              style={{ width: '100%' }}
+              placeholder="Select a transaction"
+              defaultValue={['a10', 'c12']}
+              onChange={handleChange} 
+            >
                   <Option value="Withdraw">Withdraw</Option>
                   <Option value="Cash Renewal">Cash Renewal</Option>
                   <Option value="Deposit">Deposit</Option>
@@ -76,7 +119,7 @@ const { Option } = Select;
 
             <div className='time'>
               <p>Time:</p>
-              <TimePicker defaultValue={moment('12:08', format)} format={format} />
+              <div className='timepicker' onChange={(e) => handle(e)} value={data.time}><TimePicker defaultValue={moment('12:08', format)} format={format} /></div>
               {/* <TimePicker.RangePicker /> */}
   {/* <TimePicker onChange={onChange} defaultOpenValue={moment('00:00', 'HH:mm')} /> */}
 {/* ); */}
@@ -84,7 +127,7 @@ const { Option } = Select;
 
             
             
-            <button className='generate'>Generate Token</button>
+            <button onSubmit={generateToken} className='generate'>Generate Token</button>
 
             <p className='rush'>In a Rush? Get your work done right away by buying a token in the front lines.</p>
 
