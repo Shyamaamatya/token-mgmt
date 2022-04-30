@@ -1,7 +1,7 @@
-// 
+//
 
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Navlogin } from '../../components/Navlogin/Navlogin'
 import { api } from '../../Helper/api'
 import Blogo from '../../Images/Blogo.png'
@@ -15,9 +15,16 @@ function Login() {
     password: '',
     remember: false,
   })
-  const [error, setError] = useState({ email: '', password: '' });
-  const [responseMsg , setResponseMsg] = useState("")
+  const navigate = useNavigate()
+  const [error, setError] = useState({ email: '', password: '' })
+  const [responseMsg, setResponseMsg] = useState('')
 
+  useEffect(() => {
+    const id = localStorage.getItem('id')
+    if (id) {
+      navigate('/Home')
+    }
+  }, [])
 
   const handleChange = (e) => {
     setValues({ ...values, [e?.target?.name]: e?.target?.value })
@@ -42,25 +49,26 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-api.post('/user/login', {
-    email: values.email,
-    password: values.password,
-    },
-    ).then((res)=>{
-      localStorage.setItem("id", res.data.user[0]._id)
-      localStorage.setItem("username", res.data.user[0].username)
-      localStorage.setItem("email", res.data.user[0].email)
+    api
+      .post('/user/login', {
+        email: values.email,
+        password: values.password,
+      })
+      .then((res) => {
+        localStorage.setItem('id', res.data.user[0]._id)
+        localStorage.setItem('username', res.data.user[0].username)
+        localStorage.setItem('email', res.data.user[0].email)
 
-      console.log(localStorage.getItem("id"))
-      setResponseMsg("success")
-      console.log(res.data.user)
-    })
-    .catch((error)=>{
-      setResponseMsg("Email or password incorrect")
-    })
-// const article = { title: 'React POST Request Example' };
-// const response = await axios.post('https://reqres.in/api/articles', article);
-    }
+        console.log(localStorage.getItem('id'))
+        setResponseMsg('success')
+        console.log(res.data.user)
+      })
+      .catch((error) => {
+        setResponseMsg('Email or password incorrect')
+      })
+    // const article = { title: 'React POST Request Example' };
+    // const response = await axios.post('https://reqres.in/api/articles', article);
+  }
 
   return (
     <>
@@ -73,7 +81,7 @@ api.post('/user/login', {
             </div>
             <h2>Login</h2>
           </div>
-            {responseMsg.length>0 && <div>{responseMsg}</div>}
+          {responseMsg.length > 0 && <div>{responseMsg}</div>}
           <div className='inner-form'>
             <label for='uname'>Username or Email:</label>
             <br />

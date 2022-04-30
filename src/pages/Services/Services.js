@@ -1,89 +1,82 @@
-import React, {useState} from 'react'
-import Navbar from '../../components/Navbar/Navbar';
-import "./style.css"
+import React, { useEffect, useState } from 'react'
+import Navbar from '../../components/Navbar/Navbar'
+import './style.css'
 
-import { Input, Select, Tabs } from 'antd';
-import { Link } from 'react-router-dom';
-// import { TimePicker } from 'antd';
-// import moment from 'moment';
-import { DatePicker, Space } from 'antd';
-import moment from 'moment';
-import { api } from '../../Helper/api';
+import { Input, message, Modal, Select, Tabs } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+import { DatePicker, Space } from 'antd'
+import moment from 'moment'
+import { api } from '../../Helper/api'
 import { toast, ToastContainer } from 'react-toastify'
 
-// const onChange = (time, timeString) => {
-//   console.log(time, timeString);
-
-// }
-
-
 const Services = () => {
-  const [data, setData] = useState({
-    time: " ",
-    purpose: " ",
+  const [data, setData] = useState({})
+  const [ismodelopen, setIsmodelopen] = useState(false)
+  const [time, setTime] = useState('')
+  const [purpose, setPurpose] = useState('')
+  const [selectedData, setSelectedData] = useState([])
+  const navigate = useNavigate()
 
-  })
-  const [time, setTime] = useState("")
-  const [purpose, setPurpose] = useState("")
-
-  const [selectedData, setSelectedData] = useState([]);
-
+  useEffect(() => {
+    const id = localStorage.getItem('id')
+    if (!id) {
+      message.error('You are not authoriced to visit this page')
+      navigate('/')
+    }
+  }, [])
   function handlePurposeChange(value) {
     setPurpose(value)
   }
 
-  const handleTimeChange = (e) =>{
+  const handelClickBuyToken = () => {
+    if (purpose && time) {
+      navigate('/buytoken', { state: { time, purpose } })
+    } else {
+      message.error('Please select all the value!')
+    }
+  }
+
+  const handleTimeChange = (e) => {
     setTime(e.target.value)
   }
-  const format = 'HH:mm';
+  const format = 'HH:mm'
 
-  const { RangePicker } = DatePicker;
+  const { RangePicker } = DatePicker
 
   function range(start, end) {
-    const result = [];
+    const result = []
     for (let i = start; i < end; i++) {
-      result.push(i);
+      result.push(i)
     }
-    return result;
+    return result
   }
 
+  const generateToken = async (e) => {
+    e.preventDefault()
 
-  
-// const generateToken = (e) => {
-//   e.preventDefault();
-//   api.post(`/token/${localStorage.getItem("id")}`
-//       ).then((res)=>{
-//         console.log(res)
-//       })
-      
-//       .catch((error)=>{
-//         toast.error(error?.message)
-//       })
-// }
+    const id = await localStorage.getItem('id')
+    let bodydata = { user: id, purpose: purpose, time: time }
+    api
+      .post(`/token`, bodydata)
+      .then((res) => {
+        setData(res.data)
+        setIsmodelopen(true)
+        console.log(res)
+      })
 
-const generateToken = async(e) => {
-  e.preventDefault();
-
-  const id = await localStorage.getItem("id")
-  let bodydata = {"user":id,"purpose":purpose,time:time }
-  api.post(`/token`, bodydata
-  ).then((res)=>{
-  console.log(res)
-  })
-  
-  .catch((error)=>{
-  toast.error(error?.message)
-  })
+      .catch((error) => {
+        toast.error(error?.message)
+      })
   }
 
-  const { TabPane } = Tabs;
+  const { TabPane } = Tabs
 
   const toastOptions = {
-    position: "bottom-right",
+    position: 'bottom-right',
     autoClose: 8000,
     pauseOnHover: true,
     draggable: true,
-    theme: "light",
+    theme: 'light',
   }
 
   // const handleSubmit = async (e) => {
@@ -98,7 +91,7 @@ const generateToken = async(e) => {
   //   const purpose = purpose;
   //   if (purpose == '') {
   //     toast.error(
-  //       "The confirm password should be same as password.", 
+  //       "The confirm password should be same as password.",
   //       toastOptions
   //       );
   //       return false;
@@ -114,56 +107,86 @@ const generateToken = async(e) => {
   // }
   // }
 
-const { Option } = Select;
+  const { Option } = Select
   return (
     <div>
-        <header>
-            <Navbar />
-            </header>
-            {/* <form onSubmit={handleSubmit} className="services-form"> */}
-            <div className='services'>
-            <div className='services-head'>
-              <h2>Book A Token.</h2>
-              </div>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="Transaction" key="1">
-              <Select defaultValue="Select your purpose" style={{ width: 120 }} onChange={handlePurposeChange}>
-              <Option value="deposite">Deposite</Option>
-              <Option value="withdraw">Withdraw</Option>
-              <Option value="Cash a check">Cash a check</Option>
+      <header>
+        <Navbar />
+      </header>
+      {/* <form onSubmit={handleSubmit} className="services-form"> */}
+      <div className='services'>
+        <div className='services-head'>
+          <h2>Book A Token.</h2>
+        </div>
+        <Tabs defaultActiveKey='1'>
+          <TabPane tab='Transaction' key='1'>
+            <Select
+              defaultValue='Select your purpose'
+              style={{ width: 248 }}
+              onChange={handlePurposeChange}
+            >
+              <Option value='deposite'>Deposite</Option>
+              <Option value='withdraw'>Withdraw</Option>
+              <Option value='Cash a check'>Cash a check</Option>
             </Select>
-            </TabPane>
+          </TabPane>
 
-            <TabPane tab="Others" key="2">
-            <Select defaultValue="Select your purpose" style={{ width: 120 }} onChange={handlePurposeChange}>
-              <Option value="create an account">Create an account</Option>
-              <Option value="create checkbook">Create checkbook</Option>
-              <Option value="create ATM card">Create ATM card</Option>
-              <Option value="create online banking">Create online banking</Option>
-              <Option value="problems with ATM card">Problems with ATM card</Option>
-              <Option value="create checkbook">Create checkbook</Option>
-
-          
+          <TabPane tab='Others' key='2'>
+            <Select
+              defaultValue='Select your purpose'
+              style={{ width: 120 }}
+              onChange={handlePurposeChange}
+            >
+              <Option value='create an account'>Create an account</Option>
+              <Option value='create checkbook'>Create checkbook</Option>
+              <Option value='create ATM card'>Create ATM card</Option>
+              <Option value='create online banking'>
+                Create online banking
+              </Option>
+              <Option value='problems with ATM card'>
+                Problems with ATM card
+              </Option>
+              <Option value='create checkbook'>Create checkbook</Option>
             </Select>
-              </TabPane>
-            </Tabs>
+          </TabPane>
+        </Tabs>
 
-            <div className='time'>
-              <p>Time:</p>
-              <input type="datetime-local" id="meeting-time"
-              name="meeting-time" onChange={handleTimeChange} />
-            </div>
+        <div className='time'>
+          <p>Time:</p>
+          <input
+            type='datetime-local'
+            id='meeting-time'
+            name='meeting-time'
+            onChange={handleTimeChange}
+          />
+        </div>
 
-            
-            
-            <button onClick={generateToken} className='generate'>Generate Token</button>
+        <button onClick={generateToken} className='generate'>
+          Generate Token
+        </button>
 
-            <p className='rush'>In a Rush? Get your work done right away by buying a token in the front lines.</p>
+        <p className='rush'>
+          In a Rush? Get your work done right away by buying a token in the
+          front lines.
+        </p>
 
-            <Link exact className="user" to="/buytoken"><button type="submit" className='buy'>Buy a Token</button></Link>
+        <button type='submit' className='buy' onClick={handelClickBuyToken}>
+          Buy a Token
+        </button>
+      </div>
+      {/* </form> */}
 
-            </div>
-            {/* </form> */}
+      <Modal
+        okButtonProps={{ style: { display: 'none' } }}
+        cancelButtonProps={{ style: { display: 'none' } }}
+        visible={ismodelopen}
+        onCancel={() => {
+          setIsmodelopen(false)
+        }}
+      >
+        <p>Token Generated Successfully!</p>
+        <p>Your Token: {data?.token?.code}</p>
+      </Modal>
     </div>
   )
 }

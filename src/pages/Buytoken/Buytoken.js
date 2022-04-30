@@ -1,77 +1,80 @@
-import React from 'react'
-import Khalti from '../../components/Khalti/Khalti';
-import Navbar from '../../components/Navbar/Navbar';
+import React, { useEffect, useState } from 'react'
+import Khalti from '../../components/Khalti/Khalti'
+import Navbar from '../../components/Navbar/Navbar'
 // import Tabs from '../Logintab/Logintab';
-import { Select, Tabs } from 'antd';
+import { message, Select, Tabs } from 'antd'
 
-import "./style.css"
+import './style.css'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 const Buytoken = () => {
-    const { TabPane } = Tabs;
-    const { Option } = Select;
-    
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [time, setTime] = useState('')
+  const [purpose, setPurpose] = useState('')
+  const [line, setLine] = useState('')
+
+  function handleLineChange(value) {
+    setLine(value)
+  }
+
+  // const handelClickPay = () => {
+  //   if (line) {
+  //     navigate('/buytoken', { state: { time, purpose, line } })
+  //   } else {
+  //     message.error('Please select the line number!')
+  //   }
+  // }
+
+  const { TabPane } = Tabs
+  const { Option } = Select
+
+  useEffect(() => {
+    if (location?.state?.time && location?.state?.purpose) {
+      setPurpose(location?.state?.purpose)
+      setTime(location?.state?.time)
+    } else {
+      navigate('/services')
+    }
+  }, [location])
+  console.log({ time, purpose })
   return (
-      <>
+    <>
       <Navbar />
       <div>
-
-      <div className='services'>
-            <div className='services-head'>
-              <h2>Buy A Token.</h2>
-              <p>Book tokens for transaction purpose or Documentation purpose.</p>
-              </div>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="Transaction" key="1">
-                <Select
-                showSearch
-                placeholder="Select a transaction"
-                optionFilterProp="children"
-                // onChange={onChange}
-                // onSearch={onSearch}
-                filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 }
+        <div className='services'>
+          <div className='services-head'>
+            <h2>Buy A Token.</h2>
+            <p>Book tokens for transaction purpose or Documentation purpose.</p>
+          </div>
+          <Tabs defaultActiveKey='1'>
+            <TabPane tab='Line Number' key='1'>
+              <Select
+                defaultValue='Select the line number you want to buy a token for'
+                style={{ width: 268 }}
+                onChange={handleLineChange}
               >
-                  <Option value="Withdraw">Withdraw</Option>
-                  <Option value="Cash Renewal">Cash Renewal</Option>
-                  <Option value="Deposit">Deposit</Option>
+                <Option value='linenumber2'>Line number 2</Option>
+                <Option value='linenumber4'>Line number 4</Option>
               </Select>
-              </TabPane>
-              <TabPane tab="Others" key="2">
-                <Select
-                showSearch
-                placeholder="Select an option"
-                optionFilterProp="children"
-                // onChange={onChange}
-                // onSearch={onSearch}
-                filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 }
-              >
-                  <Option value="Create a new account">Create a new account</Option>
-                  <Option value="Loan">Loan</Option>
-                  <Option value="Create credit card">Create credit card</Option>
-                  <Option value="Create credit card">Create check book</Option>
+            </TabPane>
+          </Tabs>
+          <p>The following spot in the queue are available to be bought.</p>
 
-              </Select>
-              </TabPane>
-            </Tabs>
-            <p>The following spot in the queue are available to be bought.</p>
-            <ul>
-                <div className='pay'><li className='lineno'>Line number: 2 </li> <Khalti /> </div>
-                <div className='pay'><li className='lineno'>Line number: 4 </li> <Khalti /> </div>
+          <div className='pay'>
+            {/* <button onClick={handelClickBuyToken}> */}
+            <Khalti line={line} time={time} purpose={purpose} />
+            {/* </button>{' '} */}
+          </div>
 
-            </ul>
-
-            {/* <div className='buypage'>
+          {/* <div className='buypage'>
               <div className='card'>
                   <Khalti />
                   </div>
           </div> */}
-
-            </div>
-  
-    </div>
-      </>
-    
+        </div>
+      </div>
+    </>
   )
 }
 

@@ -1,40 +1,49 @@
+import { Spin } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { toast } from 'react-toastify';
-import Navbar from '../../components/Navbar/Navbar';
-import { api } from '../../Helper/api';
-import "./style.css"
+import { toast } from 'react-toastify'
+import Navbar from '../../components/Navbar/Navbar'
+import { api } from '../../Helper/api'
+import './style.css'
 
 const Notification = () => {
   const [notification, setNotification] = useState([])
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
-    api.get(`/notification/${localStorage.getItem("id")}`
-      ).then((res)=>{
+    setLoading(true)
+    api
+      .get(`/notification/${localStorage.getItem('id')}`)
+      .then((res) => {
         setNotification(res.data.notifications)
-        console.log(res.data.notifications)
-        console.log(notification)
+        setLoading(false)
       })
-      
-      .catch((error)=>{
+
+      .catch((error) => {
+        setLoading(false)
+
         toast.error(error?.message)
       })
   }, [])
   return (
     <>
-    <Navbar />
-    <div className='notif-page'>
+      <Navbar />
+      <div className='notif-page'>
         <div className='inner-notif'>
-    <div className='notification'>
+          {notification.length === 0 && !loading && (
+            <div className='notification'>
               <p>You have no bookings, yet</p>
             </div>
-            <div className='notifications'>
-                <ul className='notification__lists'>
-                  {notification.map((item) => {
-                  return <li className='notification__list'>{item.message} </li>
-                  })}
-                </ul>
-            </div>
-            </div>
-            </div>
+          )}
+          {loading && <Spin />}
+          <div className='notifications'>
+            <ul className='notification__lists'>
+              {notification.map((item) => {
+                return <li className='notification__list'>{item.message} </li>
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

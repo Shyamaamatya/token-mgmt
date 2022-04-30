@@ -98,3 +98,11 @@
     padding-left: 7px;
     padding-right: 7px;
 }
+
+.ant-select .ant-select-single .ant-select-show-arrow {
+    width: 248px;
+}
+
+.ant-tabs-content-holder {
+    width: 100%;
+}
