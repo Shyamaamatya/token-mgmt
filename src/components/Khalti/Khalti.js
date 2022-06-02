@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { api } from '../../Helper/api'
 import myKey from './KhaltiKeys'
-import axios from 'axios'
 import KhaltiCheckout from 'khalti-checkout-web'
 import { message, Modal } from 'antd'
 import { toast } from 'react-toastify'
@@ -38,6 +37,7 @@ const Khalti = ({ line, time, purpose }) => {
     ],
   }
 
+  //for generating token after payment success
   const generateToken = async () => {
     const id = await localStorage.getItem('id')
     let bodydata = { user: id, purpose: purpose, time: time }
@@ -54,6 +54,7 @@ const Khalti = ({ line, time, purpose }) => {
       })
   }
 
+  //Handle pay with khalti
   const handleCheckout = () => {
     if (line) {
       let checkout = new KhaltiCheckout(config)
@@ -79,6 +80,8 @@ const Khalti = ({ line, time, purpose }) => {
       <button onClick={() => handleCheckout()} style={buttonStyles}>
         Pay Via Khalti
       </button>
+
+      {/* //shown if token is generated */}
       <Modal
         okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: 'none' } }}

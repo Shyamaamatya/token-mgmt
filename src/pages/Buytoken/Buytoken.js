@@ -8,12 +8,13 @@ import './style.css'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 const Buytoken = () => {
-  const location = useLocation()
+  const location = useLocation() //react router hooks
   const navigate = useNavigate()
   const [time, setTime] = useState('')
   const [purpose, setPurpose] = useState('')
   const [line, setLine] = useState('')
 
+  //storing user selected line
   function handleLineChange(value) {
     setLine(value)
   }
@@ -29,6 +30,7 @@ const Buytoken = () => {
   const { TabPane } = Tabs
   const { Option } = Select
 
+  //getting state value from useLocation and redirecting user if state value is not found
   useEffect(() => {
     if (location?.state?.time && location?.state?.purpose) {
       setPurpose(location?.state?.purpose)
@@ -66,12 +68,6 @@ const Buytoken = () => {
             <Khalti line={line} time={time} purpose={purpose} />
             {/* </button>{' '} */}
           </div>
-
-          {/* <div className='buypage'>
-              <div className='card'>
-                  <Khalti />
-                  </div>
-          </div> */}
         </div>
       </div>
     </>

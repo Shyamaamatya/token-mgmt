@@ -9,9 +9,11 @@ import { useNavigate } from 'react-router-dom'
 
 export const User = () => {
   const [tokenData, setTokenData] = useState({})
+  const [userDetail, setUserDetail] = useState({})
 
   const navigate = useNavigate()
 
+  //redirecting user if user is not logged in
   useEffect(() => {
     const id = localStorage.getItem('id')
     if (!id) {
@@ -20,11 +22,32 @@ export const User = () => {
     }
   }, [])
 
+  //for logging out
+  const handleLogOut = () => {
+    localStorage.clear()
+    navigate('/')
+  }
+
+  const handleQuit = () => {
+    try {
+      api
+        .post(`/token/quit/${localStorage.getItem('tokenid')}`)
+        .then((res) => {})
+    } catch (error) {
+      message.error("Couldn't fetch your data")
+      console.log({ error })
+    }
+  }
+
+  //getting user data
   useEffect(() => {
     try {
       api.get(`/user/${localStorage.getItem('id')}`).then((res) => {
-        console.log({ res })
+        console.log('res', res)
+        // console.log({ res })
+        setUserDetail({ user: res?.data?.user, token: res?.data?.token[0] })
         setTokenData(res?.data)
+        localStorage.setItem('tokenid', res?.data?.token[0]?._id)
       })
     } catch (error) {
       message.error("Couldn't fetch your data")
@@ -35,34 +58,47 @@ export const User = () => {
     <div>
       <Navbar />
       <div className='main'>
-        <h2>Congratulations!</h2>
-        <h5>Welcome to Online Bank Token Bookings!</h5>
+        <h2>Welcome to Online Bank Token Bookings!</h2>
 
         <div className='dp'>
           <FaUserCircle fontSize={40} />
         </div>
         <ul className='user__details'>
-          {UserData.map((item, index) => {
+          {/* {UserData.map((item, index) => {
             return (
               <li key={index} className='user__list'>
                 <span className='user__title'>{item.title}</span>:{item.value}
               </li>
             )
-          })}
-          {/* <li>Name:</li>
-              <li>Email:</li>
-              <li>Account No.:</li>
-              <li>Token No.:</li>
-              <li>Time:</li>
-              <li>Line No.:</li>
-              <li>Counter No.:</li> */}
+          })} */}
+          <li className='user__list'>
+            <span className='user__title'>Name</span>:{userDetail?.user?.name}
+          </li>
+          <li className='user__list'>
+            <span className='user__title'>Email</span>:{userDetail?.user?.email}
+          </li>
+          <li className='user__list'>
+            <span className='user__title'>Phone Number</span>:
+            {userDetail?.user?.phone_number}
+          </li>
+          <li className='user__list'>
+            <span className='user__title'>Address</span>:
+            {userDetail?.user?.address}
+          </li>
+
+          <li className='user__list'>
+            <span className='user__title'>Token Status</span>:
+            {userDetail?.token?.status}
+          </li>
         </ul>
         <div className='line-buttons'>
-          <button type='submit' className='line'>
+          <button onClick={handleQuit} type='submit' className='line'>
             Quit Line
           </button>
-          <button type='submit' className='line'>
-            Snooze
+        </div>
+        <div>
+          <button onClick={handleLogOut} type='submit' className='logout'>
+            Log Out
           </button>
         </div>
       </div>

@@ -14,9 +14,9 @@ const Services = () => {
   const [ismodelopen, setIsmodelopen] = useState(false)
   const [time, setTime] = useState('')
   const [purpose, setPurpose] = useState('')
-  const [selectedData, setSelectedData] = useState([])
   const navigate = useNavigate()
 
+  //Redirectig user to login page if user is not logged in
   useEffect(() => {
     const id = localStorage.getItem('id')
     if (!id) {
@@ -24,11 +24,15 @@ const Services = () => {
       navigate('/')
     }
   }, [])
+
+  //Storing user input value
   function handlePurposeChange(value) {
     setPurpose(value)
   }
 
+  //handle click buy token
   const handelClickBuyToken = () => {
+    //checking if user entered correct value
     if (purpose && time) {
       navigate('/buytoken', { state: { time, purpose } })
     } else {
@@ -39,18 +43,18 @@ const Services = () => {
   const handleTimeChange = (e) => {
     setTime(e.target.value)
   }
-  const format = 'HH:mm'
 
   const { RangePicker } = DatePicker
 
-  function range(start, end) {
-    const result = []
-    for (let i = start; i < end; i++) {
-      result.push(i)
-    }
-    return result
-  }
+  // function range(start, end) {
+  //   const result = []
+  //   for (let i = start; i < end; i++) {
+  //     result.push(i)
+  //   }
+  //   return result
+  // }
 
+  //For generating token
   const generateToken = async (e) => {
     e.preventDefault()
 
@@ -78,34 +82,6 @@ const Services = () => {
     draggable: true,
     theme: 'light',
   }
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const purpose = purpose;
-
-  //   // handleValidation();
-  // }
-
-  // const handleValidation = () => {
-  //   const time = time;
-  //   const purpose = purpose;
-  //   if (purpose == '') {
-  //     toast.error(
-  //       "The confirm password should be same as password.",
-  //       toastOptions
-  //       );
-  //       return false;
-  //   } else if (time == []) {
-  //     toast.error("Username should be greater than 3 characters", toastOptions);
-  //   }
-  //   } else if (password.length < 8) {
-  //     toast.error("Password should be equal or greater than 8 characters", toastOptions);
-  //   return false;
-  // } else if (email === "") {
-  //   toast.error("email is required", toastOptions);
-  //   return false;
-  // }
-  // }
 
   const { Option } = Select
   return (
@@ -176,6 +152,7 @@ const Services = () => {
       </div>
       {/* </form> */}
 
+      {/* //Shown if token is successfully generated */}
       <Modal
         okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: 'none' } }}

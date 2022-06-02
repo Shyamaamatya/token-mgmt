@@ -8,7 +8,7 @@ import { api } from '../../Helper/api'
 import Blogo from '../../Images/Blogo.png'
 
 const Signup = () => {
-  const navigation = useNavigate()
+  const navigation = useNavigate() //react router hooks
   const [logging, setLogging] = useState(false)
   const [values, setValues] = useState({
     username: '',
@@ -21,7 +21,7 @@ const Signup = () => {
     remember: false,
   })
 
-  const [responseMsg, setResponseMsg] = useState('')
+  // const [responseMsg, setResponseMsg] = useState('')
   const navigate = useNavigate()
 
   const toastOptions = {
@@ -32,6 +32,7 @@ const Signup = () => {
     theme: 'light',
   }
 
+  //for redirecting user to home user is logged in
   useEffect(() => {
     const id = localStorage.getItem('id')
     if (id) {
@@ -39,10 +40,12 @@ const Signup = () => {
     }
   }, [])
 
+  //Listening changes in the input field and storing in the state
   const handleChange = (e) => {
     setValues({ ...values, [e?.target?.name]: e?.target?.value })
   }
 
+  //creating new user
   const handleSubmit = async (e) => {
     setLogging(true)
     e.preventDefault()
@@ -70,6 +73,7 @@ const Signup = () => {
     setLogging(false)
   }
 
+  //Checking if the input field is validated
   const handleValidation = () => {
     const { password, confirmpassword, username, email } = values
     if (password !== confirmpassword) {
@@ -105,7 +109,7 @@ const Signup = () => {
             <h2>Sign Up</h2>
           </div>
 
-          {responseMsg.length > 0 && <div>{responseMsg}</div>}
+          {/* {responseMsg.length > 0 && <div>{responseMsg}</div>} */}
 
           <div className='inner-form'>
             <label htmlFor='username'>Full Name:</label>

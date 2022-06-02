@@ -7,6 +7,7 @@ import { api } from '../../Helper/api'
 import Blogo from '../../Images/Blogo.png'
 import axios from 'axios'
 import './style.css'
+import { toast } from 'react-toastify'
 
 function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -19,6 +20,7 @@ function Login() {
   const [error, setError] = useState({ email: '', password: '' })
   const [responseMsg, setResponseMsg] = useState('')
 
+  //for redirecting user to home user is logged in
   useEffect(() => {
     const id = localStorage.getItem('id')
     if (id) {
@@ -26,26 +28,12 @@ function Login() {
     }
   }, [])
 
+  //Listening changes in the input field and storing in the state
   const handleChange = (e) => {
     setValues({ ...values, [e?.target?.name]: e?.target?.value })
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   console.log({ values })
-  // }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   api.get('.login', {
-  //   params: {
-  //   email: values.email,
-  //   password: values.password,
-  //   },
-  //   })
-  //   console.log({ values })
-  //   }
-
+  //For submitting form
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -58,16 +46,17 @@ function Login() {
         localStorage.setItem('id', res.data.user[0]._id)
         localStorage.setItem('username', res.data.user[0].username)
         localStorage.setItem('email', res.data.user[0].email)
+        navigate('/Home')
 
         console.log(localStorage.getItem('id'))
         setResponseMsg('success')
         console.log(res.data.user)
       })
       .catch((error) => {
+        toast.error('Email or password incorrect')
+        console.log({ error })
         setResponseMsg('Email or password incorrect')
       })
-    // const article = { title: 'React POST Request Example' };
-    // const response = await axios.post('https://reqres.in/api/articles', article);
   }
 
   return (

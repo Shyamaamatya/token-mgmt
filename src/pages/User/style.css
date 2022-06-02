@@ -1,66 +1,84 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* margin: 2rem 20rem 3rem 20rem; */
-    width: 70%;
-    margin: 0 auto;
-    margin-top: 30px;
-    box-shadow: 0px 10px 34px rgba(0, 0, 0, 0.05);
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin: 2rem 20rem 3rem 20rem; */
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow: 0px 10px 34px rgba(0, 0, 0, 0.05);
+  padding: 10px;
 }
 
 .main h2 {
-    font-weight: 500;
-font-size: 24px;
-line-height: 28px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 
-color: #0A64BC;
+  color: #0a64bc;
 }
-.user__details{
-     list-style: none;
-     display: flex;
-     flex-direction: column;
-     /* align-self: start;
+.user__details {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  /* align-self: start;
      justify-content: flex-start; */
-     text-align: left;
-     padding: 0;
-     width: 44%;
-     margin: auto;
-     margin-bottom: 20px;
-     justify-content: center;
- }
- /* .user__list{
+  text-align: left;
+  padding: 0;
+  width: 44%;
+  margin: auto;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+/* .user__list{
      display: flex;
      justify-content: space-between;
      width: 100%;
  } */
- .user__title{
-    font-weight: 500;
-    margin-right: 15px;
-    /* width: 100px; */
- }
+.user__title {
+  font-weight: 500;
+  margin-right: 15px;
+  /* width: 100px; */
+}
 
- .line-buttons {
-     display: flex;
-     justify-content: center;
-     width: 100%;
- }
+.line-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
- .line {
-    text-decoration: none;
-    color: #000;
-    border: 1px solid #0A64BC;
-    box-sizing: border-box;
-    border-radius: 10px;
+.line {
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #0a64bc;
+  box-sizing: border-box;
+  border-radius: 10px;
 
-    border-radius: 8px;
-    width: 20%;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border-radius: 8px;
+  width: 20%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    margin: 0px 16px;
- }
+  margin: 0px 16px;
+}
+
+.logout {
+  background-color: #0a64bc;
+  border: 1px solid #0a64bc;
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-size: 14px;
+  font-weight: 600;
+  width: 133px;
+  margin-top: 12px;
+  height: 31px;
+}
