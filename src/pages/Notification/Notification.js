@@ -8,6 +8,8 @@ import './style.css'
 const Notification = () => {
   const [notification, setNotification] = useState([])
   const [loading, setLoading] = useState(false)
+  console.log({ notification })
+  console.log(notification.reverse())
 
   //fetching notification data
   useEffect(() => {
@@ -16,7 +18,7 @@ const Notification = () => {
       .get(`/notification/${localStorage.getItem('id')}`)
       .then((res) => {
         //storing data in state
-        setNotification(res.data.notifications)
+        setNotification(res.data.notifications?.reverse())
         setLoading(false)
       })
 
@@ -34,7 +36,7 @@ const Notification = () => {
           {/* //shown if user doesnt have notification */}
           {notification.length === 0 && !loading && (
             <div className='notification'>
-              <p>You have no bookings, yet</p>
+              <p>You have no notifications yet!</p>
             </div>
           )}
 
@@ -42,7 +44,7 @@ const Notification = () => {
           {loading && <Spin />}
           <div className='notifications'>
             <ul className='notification__lists'>
-              {notification.map((item) => {
+              {notification?.map((item) => {
                 return <li className='notification__list'>{item.message} </li>
               })}
             </ul>

@@ -4,18 +4,17 @@
     flex-direction: row;
     align-items: center;
     /* background-color: black; */
-    /* width: 100%; */
-    /* background-color: rgba(104, 124, 193, 1); */
-    /* background-color: #FFFFFF;
+/* width: 100%; */
+/* background-color: rgba(104, 124, 193, 1); */
+/* background-color: #FFFFFF;
     margin-bottom: 50px; */
-    /* position: fixed;
+/* position: fixed;
       top: 0;
       left: 0;
       right: 0; */
-  /* } */
-   
+/* } */
 
-   /* .nav {
+/* .nav {
     width: 100%;
     height: 92px;
     left: 0px;
@@ -35,15 +34,15 @@
     align-items: center;
   }
    */
-  /* .nav-right { */
-    /* list-style: none;
+/* .nav-right { */
+/* list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     color: white;
     align-items: center; */
 
-    /* list-style: none;
+/* list-style: none;
     display: flex;
 flex-direction: row;
 justify-content: space-between;
@@ -52,13 +51,13 @@ padding: 0px;
 padding-right: 120px;
 
   } */
-  
-  /* .nav-right li { */
-    /* display: flex;
+
+/* .nav-right li { */
+/* display: flex;
     padding: 10px 12px;
     border-right: solid 1px grey; */
 
-    /* position: static;
+/* position: static;
     width: 46px;
     height: 19px;
     left: 0px;
@@ -74,28 +73,28 @@ padding-right: 120px;
   
   .logo {
     /* background-color: rgba(104, 124, 193, 1)1; */
-    /* background-color: black; */
-    /* width: 100;
+/* background-color: black; */
+/* width: 100;
     height: 30px;
-    padding-left: 100px; */ 
+    padding-left: 100px; */
 
-    /* position: absolute;
+/* position: absolute;
     width: 100px;
     height: 60px;
     left: 100px;
     top: 5px; */
 
-  /* } */
-  
-  /* .logo img {
+/* } */
+
+/* .logo img {
     width: 100%;
     height: 100%;
   }
   
   .search {
     background-color: rgba(104, 124, 193, 1)121; */
-    /* background-color: black; */
-    /* border: none;
+/* background-color: black; */
+/* border: none;
     padding: 10px 12px;
   }
   
@@ -107,8 +106,8 @@ padding-right: 120px;
   @media only screen and (max-width: 415px) {
     .nav {
       display: flex; */
-      /* flex-direction: column; */
-      /* background-color: black;
+/* flex-direction: column; */
+/* background-color: black;
     }
   
     .nav-left {
@@ -133,22 +132,22 @@ padding-right: 120px;
     }
   
     .nav-right { */
-      /* list-style: none;
+/* list-style: none;
       display: flex;
       flex-direction: column;
       color: white;
       align-items: center; */
-    /* } */
-  
-    /* .nav-right li {
+/* } */
+
+/* .nav-right li {
       display: flex;
       align-items: center;
       border-bottom: solid 1px grey;
       text-align: center;
     }
   } */
-  
-  /* @media only screen and (min-width: 901px) {
+
+/* @media only screen and (min-width: 901px) {
       .nav-right {
         list-style: none;
         display: flex;
@@ -164,47 +163,48 @@ padding-right: 120px;
         border-right: solid 1px grey;
       }
     } */
-  
-  /* @media screen and (max-width: 991px) {
+
+/* @media screen and (max-width: 991px) {
     .nav {
       display: none;
     }
   }
-   */ 
+   */
 
-   .nav {
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     background-color: #FFF;
-     color: #000;
-     height: 70px;
-     padding: 0 40px;
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  color: #000;
+  height: 70px;
+  padding: 0 40px;
 
-     box-shadow: 0px 10px 34px rgba(0, 0, 0, 0.05);
-   }
+  box-shadow: 0px 10px 34px rgba(0, 0, 0, 0.05);
+}
 
-   .logo {
-     height:50px;
-     width: 120px;
-   }
+.logo {
+  height: 50px;
+  width: 120px;
+}
 
-   .logo > img {
-    height:100%;
-     width: 100%;
-     object-fit: cover;
-   }
+.logo > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 
-   .nav-right {
-     display: flex;
-     list-style: none;
-     align-items: center;
-     justify-content: space-between;
-     width: 13%;
-   }
+.nav-right {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 13%;
+}
 
-   .Link {
-     text-decoration: none;
-     color: #000;
-
-   }
+.Link {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  color: #000;
+}
